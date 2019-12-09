@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Influencer ;
+use App\Influencer;
 use Illuminate\Http\Request;
 
 class InfluencerController extends Controller
@@ -15,7 +15,7 @@ class InfluencerController extends Controller
     public function index(Request $request)
     {
        if ($request->ajax()) {
-            $data = Influncer::get();
+            $data = Influencer::get();
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
@@ -26,7 +26,7 @@ class InfluencerController extends Controller
                     ->make(true);
               }
             
-        return view('brand');
+        return view('influencer');
     }
 
     /**

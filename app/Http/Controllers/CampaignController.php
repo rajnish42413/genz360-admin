@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Campaign;
+use DataTables;
 use Illuminate\Http\Request;
 
 class CampaignController extends Controller

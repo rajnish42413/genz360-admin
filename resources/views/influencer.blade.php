@@ -16,11 +16,12 @@
           <thead>
               <tr>
                   <th>No</th>
+                  <th>Influencer ID</th>
                   <th>Full Name</th>
-                  <th>Email</th>
+                {{--   <th>Email</th>
                   <th>Contact no</th>
                   <th>Company Type</th>
-                  <th>Headquarter</th>
+                  <th>Headquarter</th> --}}
                   <th width="100px">Action</th>
               </tr>
           </thead>
@@ -48,16 +49,18 @@
     var table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('brands.index') }}",
+        ajax: "{{ route('influencers.index') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'full_name', name: 'full name'},
-            {data: 'email', name: 'email'},
-            {data: 'contact_no', name: 'contact no'},
-            {data: 'company_type', name: 'company type'},
-            {data: 'headquarter', name: 'headquarter'},
+            {data: 'influencer_id', name: 'influencer_id'},
+            {data: 'full_name', name: 'full_name'},
+            // {data: 'email', name: 'email'},
+            // {data: 'contact_no', name: 'contact_no'},
+            // {data: 'company_type', name: 'company_type'},
+            // {data: 'headquarter', name: 'headquarter'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
-        ]
+        ],
+        order: [[ 1, 'desc' ]]
     });
     
   });
