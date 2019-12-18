@@ -15,9 +15,13 @@ class NotificationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function user($token)
+    { 
+        if (!$token) {
+         abort(404);
+        }
+
+        return view('notification.user',compact('token'));
     }
 
     /**
@@ -99,6 +103,29 @@ class NotificationController extends Controller
 
       return back()->with('success', "Send Successfully to {$total}");
 
+    }
+
+    public function sendToUser(Request $request,$token)
+    {
+        if (!$token) {
+          return back()->with('error', "Device token is missing");
+        }
+
+       $validatedData = $request->validate([
+        'title' => 'required|max:150',
+        'message' => 'required',
+        ]);
+
+       $client = new Client();
+
+      $response = $client->post("https://exp.host/--/api/v2/push/send", ['json' => [
+            "to" => $token,
+            "sound" =>  "default",
+            "title" => $request->title,
+            "message" => $request->message
+        ] ]);
+
+      return back()->with('success', "Send Successfully");
     }
 
 

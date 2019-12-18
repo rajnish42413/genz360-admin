@@ -20,8 +20,12 @@ class BrandController extends Controller
             return Datatables::of($data)
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
-                        $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-                            return $btn;
+                        if ($row['not_token']) {
+                         $btn = '<a href="/user/notification/'.$row['not_token'].'" class="edit btn btn-primary btn-sm">send notification</a>';                            
+                          } else {
+                            $btn = '<div class="badge badge-warning small">Not Login</div>';
+                          }
+                           return $btn;                        
                       })
                     ->rawColumns(['action'])
                     ->make(true);

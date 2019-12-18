@@ -12,16 +12,17 @@
   <div class="col-md-12">
     <div class="card">
       <div class="card-body">
+        <h3> Influencers  <small>Total : {{$total}}</small></h3>
           <table class="table table-bordered data-table table-sm small">
           <thead>
               <tr>
                   <th>No</th>
                   <th>Influencer ID</th>
-                  <th>Full Name</th>
-                {{--   <th>Email</th>
-                  <th>Contact no</th>
-                  <th>Company Type</th>
-                  <th>Headquarter</th> --}}
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Mobile No</th>
+                  <th>Gender</th>
+                  <th>Age</th>
                   <th width="100px">Action</th>
               </tr>
           </thead>
@@ -49,15 +50,16 @@
     var table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
+        pageLength: 50,
         ajax: "{{ route('influencers.index') }}",
         columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex'},
             {data: 'influencer_id', name: 'influencer_id'},
-            {data: 'full_name', name: 'full_name'},
-            // {data: 'email', name: 'email'},
-            // {data: 'contact_no', name: 'contact_no'},
-            // {data: 'company_type', name: 'company_type'},
-            // {data: 'headquarter', name: 'headquarter'},
+            {data: 'name', name: 'name'},
+            {data: 'email', name: 'email'},
+            {data: 'mobile_no', name: 'mobile_no'},
+            {data: 'gender', name: 'gender'},
+            {data: 'age', name: 'age'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ],
         order: [[ 1, 'desc' ]]
