@@ -23,6 +23,7 @@
                   <th>Mobile No</th>
                   <th>Gender</th>
                   <th>Age</th>
+                  <th>Device</th>
                   <th width="100px">Action</th>
               </tr>
           </thead>
@@ -60,6 +61,7 @@
             {data: 'mobile_no', name: 'mobile_no'},
             {data: 'gender', name: 'gender'},
             {data: 'age', name: 'age'},
+            {data: 'not_token', name: 'not_token', orderable: false, searchable: false},
             {data: 'action', name: 'action', orderable: false, searchable: false},
         ],
         order: [[ 1, 'desc' ]]
