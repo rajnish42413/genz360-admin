@@ -51,7 +51,7 @@
         serverSide: true,
         ajax: "{{ route('campaigns.index') }}",
         columns: [
-            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'DT_RowIndex', name: 'DT_RowIndex',orderable: false, searchable: false},
             {data: 'campaign_id', name: 'campaign_id'},
             {data: 'image', name: 'image'},
             {data: 'name', name: 'name'},

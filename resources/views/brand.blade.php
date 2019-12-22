@@ -50,7 +50,7 @@
         serverSide: true,
         ajax: "{{ route('brands.index') }}",
         columns: [
-            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'DT_RowIndex', name: 'DT_RowIndex',orderable: false, searchable: false},
             {data: 'full_name', name: 'full name'},
             {data: 'email', name: 'email'},
             {data: 'contact_no', name: 'contact no'},

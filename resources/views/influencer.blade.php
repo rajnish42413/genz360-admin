@@ -53,7 +53,7 @@
         pageLength: 50,
         ajax: "{{ route('influencers.index') }}",
         columns: [
-            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+            {data: 'DT_RowIndex', name: 'DT_RowIndex',orderable: false, searchable: false},
             {data: 'influencer_id', name: 'influencer_id'},
             {data: 'name', name: 'name'},
             {data: 'email', name: 'email'},

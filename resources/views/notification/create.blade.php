@@ -70,10 +70,10 @@
 
             <br>
 
-            <div class="col-12 mt-3">
+           {{--  <div class="col-12 mt-3">
               <label>User Email id (Seperated by comma )</label>
               <textarea class="form-control" rows="3" placeholder="enter here ....." name="users"></textarea>
-            </div>
+            </div> --}}
 
             <br>
 
