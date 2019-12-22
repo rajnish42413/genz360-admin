@@ -101,25 +101,25 @@
          <div class="nav-wrapper">
            <ul class="nav flex-column">
              <li class="nav-item">
-               <a class="nav-link active" href="/brands">
+               <a class="nav-link active" href="brands">
                  <i class="material-icons">edit</i>
                  <span>Brand Users</span>
                </a>
              </li>
              <li class="nav-item">
-               <a class="nav-link " href="/influencers">
+               <a class="nav-link " href="influencers">
                  <i class="material-icons">vertical_split</i>
                  <span>Influencers Users</span>
                </a>
              </li>
              <li class="nav-item">
-               <a class="nav-link " href="/notification-add">
+               <a class="nav-link " href="notification-add">
                  <i class="material-icons">note_add</i>
                  <span>Add New Notification</span>
                </a>
              </li>
              <li class="nav-item">
-               <a class="nav-link " href="/campaigns">
+               <a class="nav-link " href="campaigns">
                  <i class="material-icons">view_module</i>
                  <span>campanigs</span>
                </a>

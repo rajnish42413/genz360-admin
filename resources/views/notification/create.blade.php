@@ -32,7 +32,7 @@
         @endif
 
 
-        <form action="/notification/send" method="post">
+        <form action="notification/send" method="post">
            {{ csrf_field() }}
          <div class="row">
             <div class="col-12">

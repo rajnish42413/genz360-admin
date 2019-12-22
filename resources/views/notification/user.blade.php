@@ -35,7 +35,7 @@
         @endif
 
 
-        <form action="/user/notify/{{$token}}" method="post">
+        <form action="user/notify/{{$token}}" method="post">
            {{ csrf_field() }}
          <div class="row">
             <div class="col-12 mt-3 mb-5">
