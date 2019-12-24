@@ -21,7 +21,7 @@ class BrandController extends Controller
                     ->addIndexColumn()
                     ->addColumn('action', function($row){
                         if ($row['not_token']) {
-                         $btn = '<a href="/user/notification/'.$row['not_token'].'" class="edit btn btn-primary btn-sm">send notification</a>';                            
+                         $btn = '<a href="user/notification/'.$row['not_token'].'" class="edit btn btn-primary btn-sm">send notification</a>';                            
                           } else {
                             $btn = '<div class="badge badge-warning small">Not Login</div>';
                           }

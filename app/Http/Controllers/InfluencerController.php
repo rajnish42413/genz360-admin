@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Influencer;
+use App\Location;
 use DataTables;
 use Illuminate\Http\Request;
 
@@ -16,95 +17,71 @@ class InfluencerController extends Controller
     public function index(Request $request)
     {
         $total = Influencer::count();
-        $dummy = Influencer::orderBy('influencer_id','DESC');
-        if ($request->page) {
-           $dummy->skip($request->page*1000)
-                 ->take(1000)
-                 ->get();
-         }else{
-           $dummy->get();
-         }
+        $locations = Location::all();
+        $influnceres = Influencer::orderBy('influencer_id','DESC');
 
-       if ($request->ajax()) {
-        $data = $dummy;
-        return Datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function($row){
-                     if ($row['not_token']) {
-                         $btn = '<a href="/user/notification/'.$row['not_token'].'" class="edit btn btn-primary btn-sm">send notification</a>';                            
-                          } else {
-                            $btn = '<div class="badge badge-warning small">Not Login</div>';
-                          }
-                           return $btn;                        
-                      })
-                ->rawColumns(['action'])
-                ->make(true);
-          }
-            
-        return view('influencer',compact('total'));
+        if ($request->name) {
+           $influnceres->where('name', 'like', '%' . $request->name . '%');
+         } 
+
+         if ($request->email) {
+           $influnceres->where('email', 'like', '%' . $request->email . '%');
+         } 
+
+         if ($request->mobile) {
+           $influnceres->where('mobile_no', 'like', '%' . $request->mobile . '%');
+         } 
+
+         if ($request->city) {
+           $influnceres->where('location',$request->city);
+         } 
+
+        if ($request->gender) {
+           $influnceres->where('gender',$request->gender);
+         } 
+
+        if ($request->platform) {
+            if ($request->platform === "fb") {
+               $influnceres->where('use_facebook',1);
+            }if ($request->platform === "insta") {
+               $influnceres->where('use_instagram',1);
+            }if ($request->platform === "tw") {
+               $influnceres->where('use_twitter',1);
+            }if ($request->platform === "yt") {
+               $influnceres->where('use_youtube',1);
+            }
+         } 
+
+
+
+        $influnceres = $influnceres->paginate(50);   
+        return view('influencer',compact('total',"influnceres","locations"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Influncer  $influncer
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Influncer $influncer)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Influncer  $influncer
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Influncer $influncer)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Influncer  $influncer
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Influncer $influncer)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Influncer  $influncer
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Influncer $influncer)
     {
         //

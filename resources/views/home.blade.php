@@ -14,11 +14,11 @@
         <div class="d-flex flex-column m-auto">
           <div class="stats-small__data text-center">
             <span class="stats-small__label text-uppercase">Posts</span>
-            <h6 class="stats-small__value count my-3">2,390</h6>
+            <h6 class="stats-small__value count my-3">{{$posts}}</h6>
           </div>
-          <div class="stats-small__data">
+         {{--  <div class="stats-small__data">
             <span class="stats-small__percentage stats-small__percentage--increase">4.7%</span>
-          </div>
+          </div> --}}
         </div>
         <canvas height="120" class="blog-overview-stats-small-1"></canvas>
       </div>
@@ -29,12 +29,12 @@
       <div class="card-body p-0 d-flex">
         <div class="d-flex flex-column m-auto">
           <div class="stats-small__data text-center">
-            <span class="stats-small__label text-uppercase">Pages</span>
-            <h6 class="stats-small__value count my-3">182</h6>
+            <span class="stats-small__label text-uppercase">Influencers</span>
+            <h6 class="stats-small__value count my-3">{{$influencers}}</h6>
           </div>
-          <div class="stats-small__data">
+       {{--    <div class="stats-small__data">
             <span class="stats-small__percentage stats-small__percentage--increase">12.4%</span>
-          </div>
+          </div> --}}
         </div>
         <canvas height="120" class="blog-overview-stats-small-2"></canvas>
       </div>
@@ -45,12 +45,12 @@
       <div class="card-body p-0 d-flex">
         <div class="d-flex flex-column m-auto">
           <div class="stats-small__data text-center">
-            <span class="stats-small__label text-uppercase">Comments</span>
-            <h6 class="stats-small__value count my-3">8,147</h6>
+            <span class="stats-small__label text-uppercase">Brands</span>
+            <h6 class="stats-small__value count my-3">{{$brands}}</h6>
           </div>
-          <div class="stats-small__data">
+          {{-- <div class="stats-small__data">
             <span class="stats-small__percentage stats-small__percentage--decrease">3.8%</span>
-          </div>
+          </div> --}}
         </div>
         <canvas height="120" class="blog-overview-stats-small-3"></canvas>
       </div>
@@ -61,12 +61,12 @@
       <div class="card-body p-0 d-flex">
         <div class="d-flex flex-column m-auto">
           <div class="stats-small__data text-center">
-            <span class="stats-small__label text-uppercase">Users</span>
-            <h6 class="stats-small__value count my-3">2,413</h6>
+            <span class="stats-small__label text-uppercase">Total Campaign</span>
+            <h6 class="stats-small__value count my-3">{{$campaigns}}</h6>
           </div>
-          <div class="stats-small__data">
+          {{-- <div class="stats-small__data">
             <span class="stats-small__percentage stats-small__percentage--increase">12.4%</span>
-          </div>
+          </div> --}}
         </div>
         <canvas height="120" class="blog-overview-stats-small-4"></canvas>
       </div>
@@ -77,12 +77,12 @@
       <div class="card-body p-0 d-flex">
         <div class="d-flex flex-column m-auto">
           <div class="stats-small__data text-center">
-            <span class="stats-small__label text-uppercase">Subscribers</span>
-            <h6 class="stats-small__value count my-3">17,281</h6>
+            <span class="stats-small__label text-uppercase">Campaign Completed</span>
+            <h6 class="stats-small__value count my-3">{{$campaigns}}</h6>
           </div>
-          <div class="stats-small__data">
+          {{-- <div class="stats-small__data">
             <span class="stats-small__percentage stats-small__percentage--decrease">2.4%</span>
-          </div>
+          </div> --}}
         </div>
         <canvas height="120" class="blog-overview-stats-small-5"></canvas>
       </div>
@@ -98,7 +98,7 @@
         <h6 class="m-0">Users</h6>
       </div>
       <div class="card-body pt-0">
-        <div class="row border-bottom py-2 bg-light">
+       {{--  <div class="row border-bottom py-2 bg-light">
           <div class="col-12 col-sm-6">
             <div id="blog-overview-date-range" class="input-daterange input-group input-group-sm my-auto ml-auto mr-auto ml-sm-auto mr-sm-0" style="max-width: 350px;">
               <input type="text" class="input-sm form-control" name="start" placeholder="Start Date" id="blog-overview-date-range-1">
@@ -113,7 +113,7 @@
           <div class="col-12 col-sm-6 d-flex mb-2 mb-sm-0">
             <button type="button" class="btn btn-sm btn-white ml-auto mr-auto ml-sm-auto mr-sm-0 mt-3 mt-sm-0">View Full Report &rarr;</button>
           </div>
-        </div>
+        </div> --}}
         <canvas height="130" style="max-width: 100% !important;" class="blog-overview-users"></canvas>
       </div>
     </div>

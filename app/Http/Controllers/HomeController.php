@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Influencer;
+use App\Campaign;
+use App\Brand;
+use App\CampaignPost;
 
 class HomeController extends Controller
 {
@@ -23,6 +27,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $influencers = Influencer::count();
+        $campaigns = Campaign::count();
+        $brands = Brand::count();
+        $posts = CampaignPost::count();
+        return view('home',compact('influencers','campaigns','posts','brands'));
     }
 }

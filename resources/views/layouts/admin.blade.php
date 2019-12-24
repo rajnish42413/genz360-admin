@@ -121,7 +121,14 @@
              <li class="nav-item">
                <a class="nav-link " href="campaigns">
                  <i class="material-icons">view_module</i>
-                 <span>campanigs</span>
+                 <span>Campanigs</span>
+               </a>
+             </li>
+
+               <li class="nav-item">
+               <a class="nav-link " href="locations">
+                 <i class="material-icons">view_module</i>
+                 <span>Locations</span>
                </a>
              </li>
          {{--     <li class="nav-item">

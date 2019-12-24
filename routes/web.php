@@ -1,3 +1,4 @@
+
 <?php
 
 /*
@@ -29,8 +30,8 @@ Route::middleware('web')->group(function () {
 
   Route::post('/notification/send', 'NotificationController@send');
 
-
   Route::resource('/brands', 'BrandController');
   Route::resource('/influencers', 'InfluencerController');
   Route::resource('/campaigns', 'CampaignController');
+  Route::resource('/locations', 'LocationController');
 });

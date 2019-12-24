@@ -19,4 +19,9 @@ class Influencer  extends Model
   	return $this->hasMany(Campaign::class);
   }
 
+  public function city()
+  {
+  	return $this->belongsTo(Location::class,'location','location_id')->value('location');
+  }
+
 }
