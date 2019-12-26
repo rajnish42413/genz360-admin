@@ -34,4 +34,5 @@ Route::middleware('web')->group(function () {
   Route::resource('/influencers', 'InfluencerController');
   Route::resource('/campaigns', 'CampaignController');
   Route::resource('/locations', 'LocationController');
+  Route::resource('/interests', 'InterestController');
 });

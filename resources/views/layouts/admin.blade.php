@@ -131,6 +131,13 @@
                  <span>Locations</span>
                </a>
              </li>
+
+                <li class="nav-item">
+               <a class="nav-link " href="interests">
+                 <i class="material-icons">view_module</i>
+                 <span>Interests</span>
+               </a>
+             </li>
          {{--     <li class="nav-item">
                <a class="nav-link " href="tables.html">
                  <i class="material-icons">table_chart</i>

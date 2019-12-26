@@ -32,56 +32,85 @@
 <div class="page-header row no-gutters py-4">
     <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
       <span class="text-uppercase page-subtitle">Dashboard</span>
-      <h3 class="page-title">Genz360 Overview</h3>
+      <h1 class="page-title">Influencers Overview</h1>
     </div>
   </div>
 
 <div class="row">
   <div class="col-md-12">
     <div class="card">
-      <div class="card-body">
-        <h3> Influencers  <small>Total : {{$total}}</small></h3>
-         <hr>
+      <div class="card-body">       
          <form>
+
+          <div class="row">
+            <div class="col">
+              <div class="dropdown d-inline">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                  Export
+                </button>
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#" id="json">TO JSON</a>
+                  <a class="dropdown-item" href="#" id="csv" >To CSV</a>
+                </div>                                    
+            </div>
+          </div>
+          <div class="col"><h5>{{$subtotal}} of {{$total}}</h5>   </div>
+            <div class="col">
+              <select class="form-control" name="pagination" onchange="form.submit()">
+                <option value="50" @if (request()->get('pagination') == 50) selected @endif>50</option>
+                <option value="100" @if (request()->get('pagination') == 100)selected @endif>100</option>
+                <option value="250" @if (request()->get('pagination')== 250)selected @endif>250</option>
+                <option value="500" @if (request()->get('pagination') == 500)selected @endif>500</option>
+                <option value="1000" @if (request()->get('pagination') == 1000)selected @endif>1000</option>
+              </select>
+            </div>
+          </div>
+      
+          
+         <hr>
+  
            <div class="form-row align-items-center">
 
              <div class="col-2 my-1">
-               <input type="text" class="form-control" placeholder="Search by name" name="name">
+               <input type="text" class="form-control" placeholder="Search by name" name="name" value="{{request()->get('name')}}">
              </div>
 
              <div class="col-2 my-1">
-               <input type="text" class="form-control" placeholder="Search by email" name="email">
+               <input type="text" class="form-control" placeholder="Search by email" name="email" value="{{request()->get('email')}}">
              </div>
 
              <div class="col-2 my-1">
-               <input type="text" class="form-control" placeholder="Search by mobile" name="mobile">
+               <input type="text" class="form-control" placeholder="Search by mobile" name="mobile" value="{{request()->get('mobile')}}">
              </div>
 
              <div class="col-2 my-1">
               <select class="form-control js-example-basic-single" name="city">
                 <option value="">Location</option>
                 @foreach ($locations as $location)
-                  <option value="{{$location->location_id}}">{{$location->location}}</option>
+                  <option value="{{$location->location_id}}" 
+                    @if (request()->get('city') == $location->location_id)selected @endif
+                  >{{$location->location}}</option>
                 @endforeach
               </select>
              </div>
 
-              <div class="col-2 my-1">
+              <div class="col my-1">
               <select class="form-control" name="gender">
                 <option value="">Gender</option>
-                <option value="m">M</option>
-                <option value="f">F</option>
-                <option value="o">O</option>
+                <option value="m" @if (request()->get('gender') == "m")selected @endif>
+                M</option>
+                <option value="f" @if (request()->get('gender') == "f")selected @endif>F</option>
+                <option value="o" @if (request()->get('gender') == "o")selected @endif>O</option>
               </select>
              </div>
 
-             <div class="col-2 my-1">
+             <div class="col my-1">
                <select class="form-control" name="platform">
                 <option value="">Platform</option>
-                <option value="fb">Facebook</option>
-                <option value="insta">Instagram</option>
-                <option value="tw">Twitter</option>
-                <option value="yt">Youtube</option>
+                <option value="fb" @if (request()->get('platform') == "fb")selected @endif>Facebook</option>
+                <option value="insta" @if (request()->get('platform') == "insta")selected @endif>Instagram</option>
+                <option value="tw" @if (request()->get('platform') == "tw")selected @endif>Twitter</option>
+                <option value="yt" @if (request()->get('platform') == "yt")selected @endif>Youtube</option>
               </select>
              </div>
 
@@ -91,7 +120,7 @@
            </div>
          </form>
          <br>
-          <table class="table table-bordered data-table table-sm small">
+          <table class="table table-bordered data-table table-sm small" id="tableID">
           <thead>
               <tr>
                   <th>Influencer ID</th>
@@ -161,9 +190,21 @@
 
 @section('script')
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    $('.js-example-basic-single').select2();
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
+<script type="text/javascript" src="{{ asset('scripts/tableExport.js') }}"></script>
+<script>
+$(document).ready(function() {
+  $('.js-example-basic-single').select2();
 });
-</script>
+  $('#json').on('click',function(){
+    $("#tableID").tableHTMLExport({type:'json',filename:'sample.json'});
+  })
+  $('#csv').on('click',function(){
+    $("#tableID").tableHTMLExport({type:'csv',filename:'sample.csv'});
+  })
+  // $('#pdf').on('click',function(){
+  //   $("#tableID").tableHTMLExport({type:'pdf',filename:'sample.pdf'});
+  // })
+  </script>
 @endsection

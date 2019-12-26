@@ -16,6 +16,7 @@ class InfluencerController extends Controller
      */
     public function index(Request $request)
     {
+        $pagination = 50;
         $total = Influencer::count();
         $locations = Location::all();
         $influnceres = Influencer::orderBy('influencer_id','DESC');
@@ -52,10 +53,14 @@ class InfluencerController extends Controller
             }
          } 
 
+         if ($request->$pagination) {
+             $$pagination = $request->$pagination;
+         }
 
+         $subtotal = $influnceres->count();
 
-        $influnceres = $influnceres->paginate(50);   
-        return view('influencer',compact('total',"influnceres","locations"));
+        $influnceres = $influnceres->paginate($pagination);   
+        return view('influencer',compact('total',"influnceres","locations","subtotal"));
     }
 
 

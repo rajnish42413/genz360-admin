@@ -15,13 +15,8 @@
           <table class="table table-bordered data-table table-sm small">
           <thead>
               <tr>
-                  <th>No</th>
-                  <th>Campaign ID</th>
-                  <th>Image</th>
-                  <th>Name</th>
-                  <th>Brand Id</th>
-                  <th>Description</th>
-                  <th>Status</th>
+                  <th>Interest ID</th>
+                  <th>Interest Name</th>
                   <th width="100px">Action</th>
               </tr>
           </thead>
@@ -49,18 +44,12 @@
     var table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('campaigns.index') }}",
+        ajax: "{{ route('interests.index') }}",
         columns: [
-            {data: 'DT_RowIndex', name: 'DT_RowIndex',orderable: false, searchable: false},
-            {data: 'campaign_id', name: 'campaign_id'},
-            {data: 'image', name: 'image'},
+            {data: 'id', name: 'id'},
             {data: 'name', name: 'name'},
-            {data: 'brand_id', name: 'brand_id'},
-            {data: 'desc', name: 'desc'},
-            {data: 'status', name: 'status'},
             {data: 'action', name: 'action', orderable: false, searchable: false},
-        ],
-        order: [[ 1, 'desc' ]]
+        ]
     });
     
   });
