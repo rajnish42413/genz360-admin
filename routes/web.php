@@ -32,7 +32,10 @@ Route::middleware('web')->group(function () {
 
   Route::resource('/brands', 'BrandController');
   Route::resource('/influencers', 'InfluencerController');
+
   Route::resource('/campaigns', 'CampaignController');
+  Route::get('/campaigns/{camp}/influencers', 'CampaignController@influencer');
+
   Route::resource('/locations', 'LocationController');
   Route::resource('/interests', 'InterestController');
 });

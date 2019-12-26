@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Campaign;
 use DataTables;
+use App\Influencer;
+use App\InfluncerInvolved;
+use App\Location;
 use Illuminate\Http\Request;
 
 class CampaignController extends Controller
@@ -20,7 +23,7 @@ class CampaignController extends Controller
              return Datatables::of($data)
                      ->addIndexColumn()
                      ->addColumn('action', function($row){
-                         $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+                         $btn = '<a href="campaigns/'.$row['campaign_id'].'/influencers" class="edit btn btn-primary btn-sm">View Influencers</a>';
                              return $btn;
                        })
                      ->rawColumns(['action'])
@@ -29,70 +32,20 @@ class CampaignController extends Controller
              
          return view('campaign');
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function influencer(Request $request,$camp)
     {
-        //
-    }
+        $campaign = Campaign::find($camp);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Campaign  $campaign
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Campaign $campaign)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Campaign  $campaign
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Campaign $campaign)
-    {
-        //
-    }
+        if (!$campaign) {
+            abort(404);
+        }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Campaign  $campaign
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Campaign $campaign)
-    {
-        //
-    }
+        $data = InfluncerInvolved::where('campaign_id',$camp);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Campaign  $campaign
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Campaign $campaign)
-    {
-        //
+        $data = $data->paginate(100);
+ 
+        return view('camp-influencer',compact('data','campaign'));
     }
 }
