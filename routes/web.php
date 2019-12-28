@@ -30,12 +30,12 @@ Route::middleware('web')->group(function () {
 
   Route::post('/notification/send', 'NotificationController@send');
 
-  Route::resource('brands', 'BrandController')->name('brands');
-  Route::resource('/influencers', 'InfluencerController')->name('campaigns.influencer');
+  Route::resource('/brands', 'BrandController');
+  Route::resource('/influencers', 'InfluencerController');
 
-  Route::resource('campaigns', 'CampaignController')->name('campaigns');
-  Route::get('/campaigns/{camp}/influencers', 'CampaignController@influencer')->name('campaigns.influencer');
+  Route::resource('/campaigns', 'CampaignController');
+  Route::get('/campaigns/{camp}/influencers', 'CampaignController@influencer');
 
-  Route::resource('locations', 'LocationController')->name('locations');
-  Route::resource('interests', 'InterestController')->name('interests');
+  Route::resource('/locations', 'LocationController');
+  Route::resource('/interests', 'InterestController');
 });
