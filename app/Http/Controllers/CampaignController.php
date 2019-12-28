@@ -35,17 +35,11 @@ class CampaignController extends Controller
     public function influencer(Request $request,$camp)
     {
         $campaign = Campaign::find($camp);
-
-
-
         if (!$campaign) {
             abort(404);
         }
-
         $data = InfluncerInvolved::where('campaign_id',$camp);
-
         $data = $data->paginate(100);
- 
         return view('camp-influencer',compact('data','campaign'));
     }
 }
