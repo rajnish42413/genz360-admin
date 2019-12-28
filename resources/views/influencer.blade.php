@@ -154,10 +154,31 @@
               {{-- <td>{{$inf->profile_photo}}</td> --}}
               {{-- <td>{{$inf->updated}}</td> --}}
               <td>{{$inf->i_wallet}}</td>
-              <td><i class="fas {{$inf->use_facebook ? "fa-check text-success":"fa-times text-danger"}}"></i></td>
-              <td><i class="fas {{$inf->use_instagram ? "fa-check text-success":"fa-times text-danger"}}"></i></td>
-              <td><i class="fas {{$inf->use_twitter ? "fa-check text-success":"fa-times text-danger"}}"></i></td>
-              <td><i class="fas {{$inf->use_youtube ? "fa-check text-success":"fa-times text-danger"}}"></i></td>
+
+              <td><i class="fas {{$inf->use_facebook ? "fa-check text-success":"fa-times text-danger"}}"></i>
+                @if ($inf->facebook)
+                {{$inf->facebook->follower_count}}
+                @endif
+              </td>
+
+              <td><i class="fas {{$inf->use_instagram ? "fa-check text-success":"fa-times text-danger"}}"></i>
+              @if ($inf->instagram)
+                {{$inf->instagram->follower_count}}
+                @endif
+              </td>
+
+              <td><i class="fas {{$inf->use_twitter ? "fa-check text-success":"fa-times text-danger"}}"></i>
+              @if ($inf->twitter)
+                {{$inf->twitter->follower_count}}
+                @endif
+              </td>
+
+              <td><i class="fas {{$inf->use_youtube ? "fa-check text-success":"fa-times text-danger"}}"></i>
+              @if ($inf->youtube)
+                {{$inf->youtube->subscriber_count}}
+                @endif
+              </td>
+
              {{--  <td>{{$inf->c_tokken}}</td>
               <td>{{$inf->not_token}}</td> --}}
               <td>{{$inf->registration_date}}</td>

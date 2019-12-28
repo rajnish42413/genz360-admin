@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Influencer;
 use App\Location;
 use DataTables;
+use App\Social\Facebook;
+use App\Social\Instagram;
+use App\Social\Twitter;
+use App\Social\Youtube;
+
 use Illuminate\Http\Request;
 
 class InfluencerController extends Controller
@@ -53,13 +58,13 @@ class InfluencerController extends Controller
             }
          } 
 
-         if ($request->$pagination) {
-             $$pagination = $request->$pagination;
+         if ($request->pagination) {
+             $pagination = $request->pagination;
          }
 
          $subtotal = $influnceres->count();
 
-        $influnceres = $influnceres->paginate($pagination);   
+        $influnceres = $influnceres->with('facebook','youtube','twitter','instagram')->paginate($pagination);   
         return view('influencer',compact('total',"influnceres","locations","subtotal"));
     }
 
