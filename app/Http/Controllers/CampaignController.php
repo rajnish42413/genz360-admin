@@ -23,7 +23,7 @@ class CampaignController extends Controller
              return Datatables::of($data)
                      ->addIndexColumn()
                      ->addColumn('action', function($row){
-                         $btn = '<a href="/campaigns/'.$row['campaign_id'].'/influencers" class="edit btn btn-primary btn-sm">View Influencers</a>';
+                         $btn = '<a href="campaigns/'.$row['campaign_id'].'/influencers" class="edit btn btn-primary btn-sm">View Influencers</a>';
                              return $btn;
                        })
                      ->rawColumns(['action'])
