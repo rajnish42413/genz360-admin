@@ -34,7 +34,7 @@ Route::middleware('web')->group(function () {
   Route::resource('/influencers', 'InfluencerController');
 
   Route::resource('/campaigns', 'CampaignController');
-  Route::get('/campaigns/{camp}/influencers', 'CampaignController@influencer')->name('campaigns.influencer')
+  Route::get('/campaigns/{camp}/influencers', 'CampaignController@influencer')->name('campaigns.influencer');
 
   Route::resource('/locations', 'LocationController');
   Route::resource('/interests', 'InterestController');
