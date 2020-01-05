@@ -98,10 +98,33 @@
               {{-- <td>{{$camp->profile_photo}}</td> --}}
               {{-- <td>{{$camp->updated}}</td> --}}
               <td>{{$camp->influencer->i_wallet}}</td>
-              <td><i class="fas {{$camp->influencer->use_facebook ? "fa-check text-success":"fa-times text-danger"}}"></i></td>
+              <td><i class="fas {{$camp->influencer->use_facebook ? "fa-check text-success":"fa-times text-danger"}}"></i>
+                @if ($camp->influencer->facebook)
+                {{$camp->influencer->facebook->follower_count}}
+                @endif
+              </td>
+
+              <td><i class="fas {{$camp->influencer->use_instagram ? "fa-check text-success":"fa-times text-danger"}}"></i>
+              @if ($camp->influencer->instagram)
+                {{$camp->influencer->instagram->follower_count}}
+                @endif
+              </td>
+
+              <td><i class="fas {{$camp->influencer->use_twitter ? "fa-check text-success":"fa-times text-danger"}}"></i>
+              @if ($camp->influencer->twitter)
+                {{$camp->influencer->twitter->follower_count}}
+                @endif
+              </td>
+
+              <td><i class="fas {{$camp->influencer->use_youtube ? "fa-check text-success":"fa-times text-danger"}}"></i>
+              @if ($camp->influencer->youtube)
+                {{$camp->influencer->youtube->subscriber_count}}
+                @endif
+              </td>
+              <!-- <td><i class="fas {{$camp->influencer->use_facebook ? "fa-check text-success":"fa-times text-danger"}}"></i></td>
               <td><i class="fas {{$camp->influencer->use_instagram ? "fa-check text-success":"fa-times text-danger"}}"></i></td>
               <td><i class="fas {{$camp->influencer->use_twitter ? "fa-check text-success":"fa-times text-danger"}}"></i></td>
-              <td><i class="fas {{$camp->influencer->use_youtube ? "fa-check text-success":"fa-times text-danger"}}"></i></td>
+              <td><i class="fas {{$camp->influencer->use_youtube ? "fa-check text-success":"fa-times text-danger"}}"></i></td> -->
              {{--  <td>{{$camp->c_tokken}}</td>
               <td>{{$camp->not_token}}</td> --}}
               <td>{{$camp->registration_date}}</td>
