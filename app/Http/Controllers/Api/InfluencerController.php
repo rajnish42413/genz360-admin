@@ -11,13 +11,13 @@ class InfluencerController extends Controller
 {
 
 
-    public function show(Request $request,$influncer)
+    public function show(Request $request)
     {
         if (!$influncer) {
             abort(404);
         }
 
-        return $influncer = Influncer::find($influncer);
+        return $influncer;
     }
 
 
