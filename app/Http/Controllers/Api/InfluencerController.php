@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Influencer;
 use DataTables;
 use Illuminate\Http\Request;
@@ -11,27 +12,44 @@ class InfluencerController extends Controller
 {
 
 
-    public function show(Request $request)
+   public function index()
+   {
+       return Influencer::take(10)->get();
+   }
+
+    public function show(Request $request,$influencer)
     {
-        if (!$influncer) {
-            abort(404);
+        if (!$influencer) {
+             return response()->json([
+                 'error' => 'Influencer not found'
+             ], 404);
         }
 
-        return $influncer;
+        return Influencer::find($influencer);
     }
 
 
-    public function edit(Influncer $influncer)
+    public function update(Request $request, $influencer)
     {
-        //
+        if (!$influencer) {
+            return response()->json([
+                'error' => 'Influencer not found'
+            ], 404);
+        }
+
+        $influencer = Influencer::find($influencer);
+
+        $influencer->c_tokken = $request->device_token;
+        $influencer->save();
+
+
+        return response()->json([
+            'status' => "ok",
+            'message' => 'Update Successfully'
+        ], 200);
     }
 
-    public function update(Request $request, Influncer $influncer)
-    {
-        //
-    }
-
-    public function destroy(Influncer $influncer)
+    public function destroy(Influencer $influencer)
     {
         //
     }
