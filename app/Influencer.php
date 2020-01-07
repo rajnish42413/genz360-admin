@@ -8,14 +8,13 @@ use App\Social\Facebook;
 use App\Social\Instagram;
 use App\Social\Twitter;
 use App\Social\Youtube;
-
-
 use Illuminate\Database\Eloquent\Model;
 
 class Influencer  extends Model
 {
   protected $table = 'influencer_details';
   protected $primaryKey = 'influencer_id';
+  public $timestamps = false;
 
 
   public function involves()

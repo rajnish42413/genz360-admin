@@ -19,6 +19,6 @@ Route::get('/', function () {
     ];
 });
 
-
-Route::post('influencer/{id}/update', "InfluencerController@update");
-Route::get('influencer/{id}', "InfluencerController@show");
+Route::get('influencers', "Api\InfluencerController@index");
+Route::post('influencers/{id}/update', "Api\InfluencerController@update");
+Route::get('influencers/{id}', "Api\InfluencerController@show");
