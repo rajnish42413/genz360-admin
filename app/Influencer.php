@@ -14,7 +14,8 @@ class Influencer  extends Model
 {
   protected $table = 'influencer_details';
   protected $primaryKey = 'influencer_id';
-  public $timestamps = false;
+
+   public $timestamps = false;
 
 
   public function involves()
