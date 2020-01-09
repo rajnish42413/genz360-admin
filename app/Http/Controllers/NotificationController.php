@@ -70,7 +70,10 @@ class NotificationController extends Controller
         $temp_token = [];
         foreach ($users as $user) {
           if ($user->influencer && $user->influencer->not_token) {
-            $temp_token[] = $user->influencer->not_token;
+            $search = 'ExponentPushToken';             
+            if (preg_match("/{$search}/i", $user->influencer->not_token)) {          
+               $temp_token[] = $user->influencer->not_token;
+            }
           }
         }
         $tokens  = array_merge($tokens, $temp_token);
@@ -88,6 +91,13 @@ class NotificationController extends Controller
       $client = new Client();
       $total = count($tokens);
 
+      
+      $tokens = array_filter($tokens,function($value){
+                 $search = 'ExponentPushToken'; 
+                  return preg_match("/{$search}/i", $value);
+                });
+
+      return $tokens;
       if ($total > 0) {
         $response = $client->post("https://exp.host/--/api/v2/push/send", ['json' => [
             "to" => $tokens,
