@@ -78,9 +78,10 @@
        <aside class="main-sidebar col-12 col-md-3 col-lg-2 px-0">
          <div class="main-navbar">
            <nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0">
-             <a class="navbar-brand w-100 mr-0" href="/home" style="line-height: 25px;">
+             <a class="navbar-brand w-100 mr-0" href="{{ route('home') }}" style="line-height: 25px;">
                <div class="d-table m-auto">
-                 <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="img/gi.png" alt="Shards Dashboard">
+                 <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" 
+                 src="{{ asset('img/gi.png') }}" alt="Shards Dashboard">
                  <span class="d-none d-md-inline ml-1">Genz360</span>
                </div>
              </a>
@@ -101,39 +102,39 @@
          <div class="nav-wrapper">
            <ul class="nav flex-column">
              <li class="nav-item">
-               <a class="nav-link active" href="brands">
+               <a class="nav-link active" href="{{ route('brands.index') }}">
                  <i class="material-icons">edit</i>
                  <span>Brand Users</span>
                </a>
              </li>
              <li class="nav-item">
-               <a class="nav-link " href="influencers">
+               <a class="nav-link" href="{{ route('influencers.index') }}">
                  <i class="material-icons">vertical_split</i>
                  <span>Influencers Users</span>
                </a>
              </li>
              <li class="nav-item">
-               <a class="nav-link " href="notification-add">
+               <a class="nav-link" href="{{ route('notification.add') }}">
                  <i class="material-icons">note_add</i>
                  <span>Add New Notification</span>
                </a>
              </li>
              <li class="nav-item">
-               <a class="nav-link " href="campaigns">
+               <a class="nav-link" href="{{ route('campaigns.index') }}">
                  <i class="material-icons">view_module</i>
                  <span>Campanigs</span>
                </a>
              </li>
 
                <li class="nav-item">
-               <a class="nav-link " href="locations">
+               <a class="nav-link" href="{{ route('locations.index') }}">
                  <i class="material-icons">view_module</i>
                  <span>Locations</span>
                </a>
              </li>
 
                 <li class="nav-item">
-               <a class="nav-link " href="interests">
+               <a class="nav-link" href="{{ route('interests.index') }}">
                  <i class="material-icons">view_module</i>
                  <span>Interests</span>
                </a>
