@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Brand;
 use App\Influencer ;
+use App\Notification ;
 use App\InfluncerInvolved;
 Use App\Campaign;
 use GuzzleHttp\Client;
@@ -102,13 +103,12 @@ class NotificationController extends Controller
             "to" => $tokens,
             "sound" =>  "default",
             "title" => $request->title,
+            "channelId" => "Reminders",
             "message" => $request->message
         ] ]);
       }
       
-
-
-      return back()->with('success', "Send Successfully to {$total}");
+      return $message = (string)$response->getBody();
 
     }
 
@@ -121,7 +121,7 @@ class NotificationController extends Controller
 
        $validatedData = $request->validate([
         'title' => 'required|max:150',
-        'message' => 'required',
+          'message' => 'required',
         ]);
 
        $client = new Client();
@@ -130,10 +130,19 @@ class NotificationController extends Controller
             "to" => $token->not_token,
             "sound" =>  "default",
             "title" => $request->title,
+            "channelId" => "Reminders",
             "message" => $request->message
         ] ]);
 
-      return back()->with('success', "Send Successfully");
+
+      // Notification::create([
+      //    "subject" => $request->title,
+      //    "message" => $request->message
+      // ]);
+
+     return $message = (string)$response->getBody();
+
+      return back()->with('success', $message);
     }
 
 
