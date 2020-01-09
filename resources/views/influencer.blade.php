@@ -190,7 +190,7 @@
 
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink-{{$inf->influencer_id}}">
                     @if ($inf->not_token)
-                    <a class="dropdown-item" href="user/notification/{{$inf->not_token}}">Send Notification</a>
+                    <a class="dropdown-item" href="user/notification/{{$inf->not_token}}" href="{{ route('notification.user',$inf->not_token) }}">Send Notification</a>
                     @endif
                     <a class="dropdown-item" href="#">More Detail</a>
                     <a class="dropdown-item" href="#">Delete User</a>
