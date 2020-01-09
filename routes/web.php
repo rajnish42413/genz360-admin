@@ -19,23 +19,23 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::middleware('web')->group(function () {
-  Route::get('/home', 'HomeController@index')->name('home');
+  Route::get('home', 'HomeController@index')->name('home');
 
-  Route::get('/notification-add', 'NotificationController@create');
-   Route::get('/user/notification/{token}', 'NotificationController@user');
+  Route::get('notification-add', 'NotificationController@create');
+   Route::get('user/notification/{token}', 'NotificationController@user');
 
-  Route::post('/user/notify/{token}', 'NotificationController@sendToUser');
+  Route::post('user/notify/{token}', 'NotificationController@sendToUser');
 
-  Route::get('/brand/{user}/send', 'NotificationController@infulencerSend');
+  Route::get('brand/{user}/send', 'NotificationController@infulencerSend');
 
-  Route::post('/notification/send', 'NotificationController@send');
+  Route::post('notification/send', 'NotificationController@send');
 
-  Route::resource('/brands', 'BrandController');
-  Route::resource('/influencers', 'InfluencerController');
+  Route::resource('brands', 'BrandController');
+  Route::resource('influencers', 'InfluencerController');
 
-  Route::resource('/campaigns', 'CampaignController');
-  Route::get('/campaigns/{camp}/influencers', 'CampaignController@influencer');
+  Route::resource('campaigns', 'CampaignController');
+  Route::get('campaigns/{camp}/influencers', 'CampaignController@influencer');
 
-  Route::resource('/locations', 'LocationController');
-  Route::resource('/interests', 'InterestController');
+  Route::resource('locations', 'LocationController');
+  Route::resource('interests', 'InterestController');
 });

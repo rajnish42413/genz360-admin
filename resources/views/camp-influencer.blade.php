@@ -135,8 +135,8 @@
                   </a>
 
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink-{{$camp->campluencer_id}}">
-                    @if ($camp->not_token)
-                    <a class="dropdown-item" href="user/notification/{{$camp->not_token}}">Send Notification</a>
+                    @if ($camp->influencer->not_token)
+                    <a class="dropdown-item" href="/user/notification/{{$camp->influencer->not_token}}">Send Notification</a>
                     @endif
                     <a class="dropdown-item" href="#">More Detail</a>
                     <a class="dropdown-item" href="#">Delete User</a>
