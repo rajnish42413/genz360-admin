@@ -92,12 +92,11 @@ class NotificationController extends Controller
       $total = count($tokens);
 
       
-      $tokens = array_filter($tokens,function($value){
+      $tokens =  array_filter($tokens,function($value){
                  $search = 'ExponentPushToken'; 
                   return preg_match("/{$search}/i", $value);
                 });
 
-      return $tokens;
       if ($total > 0) {
         $response = $client->post("https://exp.host/--/api/v2/push/send", ['json' => [
             "to" => $tokens,
