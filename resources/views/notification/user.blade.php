@@ -35,7 +35,7 @@
         @endif
 
 
-        <form action="{{ route('notify.user') }}" method="post">
+        <form action="{{route('notify.user',$token)}}" method="post">
            {{ csrf_field() }}
          <div class="row">
             <div class="col-12 mt-3 mb-5">

@@ -23,7 +23,7 @@ Route::middleware('web')->group(function () {
 
   Route::get('notification-add', 'NotificationController@create')->name('notification.add');
   Route::get('user/notification/{token}', 'NotificationController@user')->name('notification.user');
-  Route::get('user/notify/{token}', 'NotificationController@sendToUser')->name('notify.user');
+  Route::get('user/notify', 'NotificationController@sendToUser')->name('notify.user');
   Route::get('brand/{user}/send', 'NotificationController@infulencerSend')->name('notification.brand');
   Route::post('notification/send', 'NotificationController@send')->name('notification.send');
 
