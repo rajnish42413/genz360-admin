@@ -114,7 +114,7 @@ class NotificationController extends Controller
 
     public function sendToUser(Request $request,$id)
     {
-       $token =  Influencer::find($id)->value("not_token");
+       $token =  Influencer::find($id);
         if (!$token) {
           return back()->with('error', "Device token is missing");
         }
@@ -127,7 +127,7 @@ class NotificationController extends Controller
        $client = new Client();
 
       $response = $client->post("https://exp.host/--/api/v2/push/send", ['json' => [
-            "to" => $token,
+            "to" => $token->not_token,
             "sound" =>  "default",
             "title" => $request->title,
             "message" => $request->message
