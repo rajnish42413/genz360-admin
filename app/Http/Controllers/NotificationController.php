@@ -97,7 +97,7 @@ class NotificationController extends Controller
                   return preg_match("/{$search}/i", $value);
                 });
 
-      $tokens;
+      return $tokens;
       if ($total > 0) {
         $response = $client->post("https://exp.host/--/api/v2/push/send", ['json' => [
             "to" => $tokens,
