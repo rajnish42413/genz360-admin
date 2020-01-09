@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 
 Route::get('influencers', "Api\InfluencerController@index");
-Route::post('influencers/{id}/update', "Api\InfluencerController@update");
+Route::post('influencers/update', "Api\InfluencerController@update");
 Route::get('influencers/{id}', "Api\InfluencerController@show");
 
 Route::get('campaigns', "Api\CampaignController@index");

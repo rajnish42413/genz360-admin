@@ -1,6 +1,4 @@
 <?php
-
-
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -9,40 +7,34 @@ use DataTables;
 use Illuminate\Http\Request;
 
 class InfluencerController extends Controller
-{
+{ 
 
+     public function index()
+    {
+        return Influencer::take(10)->get();
+    }
 
-   public function index()
-   {
-       return Influencer::take(10)->get();
-   }
 
     public function show(Request $request,$influencer)
     {
         if (!$influencer) {
-             return response()->json([
-                 'error' => 'Influencer not found'
-             ], 404);
+            abort(404);
         }
-
-        return Influencer::find($influencer);
+        return $influencer = Influencer::find($influencer);
     }
 
 
-    public function update(Request $request, $influencer)
+    public function update(Request $request)
     {
-        if (!$influencer) {
+        if (!$request->token) {
             return response()->json([
                 'error' => 'Influencer not found'
             ], 404);
         }
 
-        $influencer = Influencer::find($influencer);
-
-        $influencer->c_tokken = $request->device_token;
+        $influencer = Influencer::where('c_tokken',$request->token)->first();
+        $influencer->not_token = $request->device_token;
         $influencer->save();
-
-
         return response()->json([
             'status' => "ok",
             'message' => 'Update Successfully'
