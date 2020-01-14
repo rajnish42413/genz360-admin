@@ -64,7 +64,8 @@
               <tr>
                   <th>ID</th>
                   <th>Influencer</th>                 
-                  <th>Wallet</th>               
+                  <th>Wallet</th>   
+                  <th>Post Detail</th>            
                   <th>Accepted</th>               
                   <th>Payout</th>               
                   <th>Action</th>
@@ -99,6 +100,16 @@
               </td>
 
               <td>{{$camp->influencer->i_wallet}}</td>  
+
+              <td>
+                <div class="small">
+                  PostData-{{$camp->post->post_data}},<br>
+                  postuniqueId-{{$camp->post->post_unique_id}}<br>                 
+                  @if ($camp->post->file_name)
+                  <a href="http://www.genz360.com:81/get-image/{{$camp->post->file_name}}" target="_blank">View File</a>
+                  @endif
+                </div>
+              </td>
                <td>
                  @if ($camp->accepted)
                   <div class="badge badge-success">true</div>

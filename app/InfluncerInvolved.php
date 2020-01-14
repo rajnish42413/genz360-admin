@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Influencer;
+use App\InfluencerPost;
 use Illuminate\Database\Eloquent\Model;
 
 class InfluncerInvolved extends Model
@@ -14,5 +15,10 @@ class InfluncerInvolved extends Model
     public function influencer()
     {
     	return $this->belongsTo(Influencer::class,'influencer_id','influencer_id');
+    }
+
+    public function post()
+    {
+    	return $this->hasOne(InfluencerPost::class,'inf_inv_id');
     }
 }
