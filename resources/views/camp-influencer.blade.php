@@ -63,71 +63,58 @@
           <thead>
               <tr>
                   <th>ID</th>
-                  <th>I ID</th>
-                   <th>C ID</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Mobile No</th>
-                  <th>Gender</th>
-                  <th>Age</th>
-                  <th>DOB</th>
-                  <th>Location</th>
-                  <th>Wallet</th>
-                  <th><i class="fab fa-facebook-square"></i></th>
-                  <th><i class="fab fa-instagram"></i></th>
-                  <th><i class="fab fa-twitter-square"></i></th>
-                  <th><i class="fab fa-youtube-square"></i></th>
-                  <th>Created At</th>
+                  <th>Influencer</th>                 
+                  <th>Wallet</th>               
+                  <th>Accepted</th>               
+                  <th>Payout</th>               
                   <th>Action</th>
               </tr>
           </thead>
           <tbody>
             @foreach ($data as $camp)
              <tr>
+
               <td>{{$camp->inf_inv_id}}</td>
-              <td>{{$camp->campaingn_id}}</td>
+
               @if ($camp->influencer)
-              <td>{{$camp->influencer_id}}</td>
-              <td>{{$camp->influencer->name}}</td>
-              <td>{{$camp->influencer->email}}</td>
-              <td>{{$camp->influencer->mobile_no}}</td>
-              <td class="text-uppercase">{{$camp->influencer->gender}}</td>
-              <td>{{$camp->influencer->age}}</td>
-              <td>{{$camp->influencer->date_of_birth}}</td>
-              <td>{{$camp->influencer->city()}}</td>
-              {{-- <td>{{$camp->profile_photo}}</td> --}}
-              {{-- <td>{{$camp->updated}}</td> --}}
-              <td>{{$camp->influencer->i_wallet}}</td>
-              <td><i class="fas {{$camp->influencer->use_facebook ? "fa-check text-success":"fa-times text-danger"}}"></i>
-                @if ($camp->influencer->facebook)
-                {{$camp->influencer->facebook->follower_count}}
-                @endif
+              <td>
+                <div class="row">
+                  <div class="col">
+                    <div class="small">ID-{{$camp->influencer_id}},<br>
+                         Name-{{$camp->influencer->name}},<br>
+                         Email-{{$camp->influencer->email}},<br>
+                         Phone-{{$camp->influencer->mobile_no}}
+
+                    </div>
+                  </div>
+                  <div class="col">
+                     <div class="small">
+                        Gender-{{$camp->influencer->gender}},
+                        Age-{{$camp->influencer->age}},<br>
+                        DOB-{{$camp->influencer->date_of_birth}},
+                        Location-{{$camp->influencer->city()}}
+                     </div>
+                  </div>
+                </div>                
               </td>
 
-              <td><i class="fas {{$camp->influencer->use_instagram ? "fa-check text-success":"fa-times text-danger"}}"></i>
-              @if ($camp->influencer->instagram)
-                {{$camp->influencer->instagram->follower_count}}
-                @endif
-              </td>
+              <td>{{$camp->influencer->i_wallet}}</td>  
+               <td>
+                 @if ($camp->accepted)
+                  <div class="badge badge-success">true</div>
+                 @else 
+                  <div class="badge badge-danger">False</div>
+                 @endif
+               </td>
 
-              <td><i class="fas {{$camp->influencer->use_twitter ? "fa-check text-success":"fa-times text-danger"}}"></i>
-              @if ($camp->influencer->twitter)
-                {{$camp->influencer->twitter->follower_count}}
-                @endif
-              </td>
+               <td>
+                 @if ($camp->paid_status)
+                  <div class="badge badge-success">Done</div>
+                 @else 
+                  <div class="badge badge-warning">Not Done</div>
+                 @endif
+               </td>
 
-              <td><i class="fas {{$camp->influencer->use_youtube ? "fa-check text-success":"fa-times text-danger"}}"></i>
-              @if ($camp->influencer->youtube)
-                {{$camp->influencer->youtube->subscriber_count}}
-                @endif
-              </td>
-              <!-- <td><i class="fas {{$camp->influencer->use_facebook ? "fa-check text-success":"fa-times text-danger"}}"></i></td>
-              <td><i class="fas {{$camp->influencer->use_instagram ? "fa-check text-success":"fa-times text-danger"}}"></i></td>
-              <td><i class="fas {{$camp->influencer->use_twitter ? "fa-check text-success":"fa-times text-danger"}}"></i></td>
-              <td><i class="fas {{$camp->influencer->use_youtube ? "fa-check text-success":"fa-times text-danger"}}"></i></td> -->
-             {{--  <td>{{$camp->c_tokken}}</td>
-              <td>{{$camp->not_token}}</td> --}}
-              <td>{{$camp->registration_date}}</td>
               <td>
                 <div class="dropdown show dropleft">
                   <a class="btn btn-primary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink-{{$camp->campluencer_id}}" data-toggle="dropdown" aria-haspopup="flase" aria-expanded="false">
@@ -138,8 +125,12 @@
                     @if ($camp->influencer->not_token)
                     <a class="dropdown-item" href="{{ route('notification.user',$camp->influencer->influencer_id) }}">Send Notification</a>
                     @endif
-                    <a class="dropdown-item" href="#">More Detail</a>
-                    <a class="dropdown-item" href="#">Delete User</a>
+
+                    @if (!$camp->paid_status)
+                    <a href="{{ route('campaign.payout',$camp->inf_inv_id) }}" class="dropdown-item">Payout</a>
+                    @endif
+
+                    
                   </div>
                 </div>
               </td>

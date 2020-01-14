@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class InfluncerInvolved extends Model
 {
      protected $table = 'influencers_involved';
+      protected $primaryKey = 'inf_inv_id';
+      public $timestamps = false;
 
     public function influencer()
     {

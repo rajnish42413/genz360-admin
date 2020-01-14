@@ -7,6 +7,7 @@ use DataTables;
 use App\Influencer;
 use App\InfluncerInvolved;
 use App\Location;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 class CampaignController extends Controller
@@ -34,12 +35,51 @@ class CampaignController extends Controller
     }
     public function influencer(Request $request,$camp)
     {
-        $campaign = Campaign::find($camp);
+         $campaign = Campaign::find($camp);
         if (!$campaign) {
             abort(404);
         }
         $data = InfluncerInvolved::where('campaign_id',$camp);
         $data = $data->paginate(100);
         return view('camp-influencer',compact('data','campaign'));
+    }
+
+
+    public function payout(Request $request,$influncerInvolved)
+    {
+        $InfluncerInvolved = InfluncerInvolved::where('inf_inv_id',$influncerInvolved)->first();
+
+        $campaign = Campaign::where('campaign_id',$InfluncerInvolved->campaign_id)->first();
+
+        if (!$InfluncerInvolved && !$campaign ) {
+            abort(404);
+        }
+
+
+        $InfluncerInvolved->active_status = 3;
+        $InfluncerInvolved->paid_status = 1;
+        $InfluncerInvolved->amount_to_be_paid= $campaign->payout_influencers1 ?? $campaign->payout_influencers2;
+        $InfluncerInvolved->save();
+
+
+        $influencer = $InfluncerInvolved->influencer;
+        $influencer->i_wallet = $influencer->i_wallet + $InfluncerInvolved->amount_to_be_paid;
+        $influencer->save();
+
+        $message = "Genz360 ! send {$InfluncerInvolved->amount_to_be_paid} credit for {$campaign->name} to your wallet.";
+
+            if ($influencer->not_token) {
+                $client = new Client();
+               $response = $client->post("https://exp.host/--/api/v2/push/send", ['json' => [
+                    "to" => $influencer->not_token,
+                    "sound" =>  "default",
+                    "title" => "",
+                    "channelId" => "Reminders",
+                    "message" => $message
+                ] ]);
+            }      
+
+        return back()->with('success', "Successfully Payout");
+        
     }
 }

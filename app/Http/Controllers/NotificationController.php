@@ -99,16 +99,19 @@ class NotificationController extends Controller
                 });
 
       if ($total > 0) {
-        $response = $client->post("https://exp.host/--/api/v2/push/send", ['json' => [
-            "to" => $tokens,
-            "sound" =>  "default",
-            "title" => $request->title,
-            "channelId" => "Reminders",
-            "message" => $request->message
-        ] ]);
+        foreach ($tokens as $token) {
+            $response = $client->post("https://exp.host/--/api/v2/push/send", ['json' => [
+              "to" => $token,
+              "sound" =>  "default",
+              "title" => $request->title,
+              "channelId" => "Reminders",
+              "message" => $request->message
+             ] ]);
+          }
+        
       }
       
-      return $message = (string)$response->getBody();
+        return back()->with('success', "success");
 
     }
 
@@ -126,7 +129,7 @@ class NotificationController extends Controller
 
        $client = new Client();
 
-      $response = $client->post("https://exp.host/--/api/v2/push/send", ['json' => [
+       $response = $client->post("https://exp.host/--/api/v2/push/send", ['json' => [
             "to" => $token->not_token,
             "sound" =>  "default",
             "title" => $request->title,
@@ -134,15 +137,7 @@ class NotificationController extends Controller
             "message" => $request->message
         ] ]);
 
-
-      // Notification::create([
-      //    "subject" => $request->title,
-      //    "message" => $request->message
-      // ]);
-
-     return $message = (string)$response->getBody();
-
-      return back()->with('success', $message);
+      return back()->with('success', "success");
     }
 
 
