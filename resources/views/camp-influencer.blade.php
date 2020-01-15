@@ -123,6 +123,9 @@
                <td>
                  @if ($camp->paid_status)
                   <div class="badge badge-success">Done</div>
+                  @if ($camp->amount_to_be_paid)
+                  <div class="text-primary">INR.{{$camp->amount_to_be_paid}}</div>
+                  @endif
                  @else 
                   <div class="badge badge-warning">Not Done</div>
                  @endif
