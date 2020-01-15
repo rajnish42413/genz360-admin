@@ -103,11 +103,13 @@
 
               <td>
                 <div class="small">
-                  PostData-{{$camp->post->post_data}},<br>
-                  postuniqueId-{{$camp->post->post_unique_id}}<br>                 
-                  @if ($camp->post->file_name)
-                  <a href="http://www.genz360.com:81/get-image/{{$camp->post->file_name}}" target="_blank">View File</a>
-                  @endif
+                  @if ($camp->post)
+                      PostData-{{$camp->post->post_data}},<br>
+                      postuniqueId-{{$camp->post->post_unique_id}}<br>                 
+                      @if ($camp->post->file_name)
+                      <a href="http://www.genz360.com:81/get-image/{{$camp->post->file_name}}" target="_blank">View File</a>
+                      @endif
+                  @endif                 
                 </div>
               </td>
                <td>
