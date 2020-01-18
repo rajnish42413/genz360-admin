@@ -59,13 +59,14 @@
          <hr>
 
          <br>
-          <table class="table table-bordered data-table table-sm small" id="tableID">
+         <div class="table-responsive">
+          <table class="table table-bordered data-table table-sm small table-hover" id="tableID">
           <thead>
               <tr>
                   <th>ID</th>
                   <th>Influencer</th>                 
                   <th>Wallet</th>   
-                  <th>Post Detail</th>            
+                  <th width="20%">Post Detail</th>            
                   <th>Accepted</th>               
                   <th>Payout</th>               
                   <th>Action</th>
@@ -102,7 +103,7 @@
               <td>{{$camp->influencer->i_wallet}}</td>  
 
               <td>
-                <div class="small">
+                <div class="small text-break text-wrap " style="width: 200px">
                   @if ($camp->post)
                       PostData-{{$camp->post->post_data}},<br>
                       postuniqueId-{{$camp->post->post_unique_id}}<br>                 
@@ -157,6 +158,7 @@
        </table>
       {{ $data->links() }}
     </div>
+  </div>
     </div>
   </div>
 </div>

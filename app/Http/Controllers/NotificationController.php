@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Brand;
+
+use App\Notifications\PushNotification;
 use App\Influencer ;
 use App\Notification ;
 use App\InfluncerInvolved;
@@ -51,8 +53,8 @@ class NotificationController extends Controller
     {
 
         $validatedData = $request->validate([
-        'title' => 'required|max:150',
-        'message' => 'required',
+        'title' => 'max:100',
+        'message' => 'required|max:250',
         ]);
 
 
@@ -103,8 +105,7 @@ class NotificationController extends Controller
             $response = $client->post("https://exp.host/--/api/v2/push/send", ['json' => [
               "to" => $token,
               "sound" =>  "default",
-              "title" => $request->title,
-              "channelId" => "Reminders",
+              "title" => $request->title ?? "Genz360",
               "message" => $request->message
              ] ]);
           }
@@ -117,25 +118,18 @@ class NotificationController extends Controller
 
     public function sendToUser(Request $request,$id)
     {
-       $token =  Influencer::find($id);
-        if (!$token) {
+       $user =  Influencer::find($id);
+
+        if (!$user) {
           return back()->with('error', "Device token is missing");
         }
 
        $validatedData = $request->validate([
-        'title' => 'required|max:150',
-          'message' => 'required',
+          'title' => 'max:100',
+          'message' => 'required|max:250',
         ]);
 
-       $client = new Client();
-
-       $response = $client->post("https://exp.host/--/api/v2/push/send", ['json' => [
-            "to" => $token->not_token,
-            "sound" =>  "default",
-            "title" => $request->title,
-            "channelId" => "Reminders",
-            "message" => $request->message
-        ] ]);
+       $user->notify(new PushNotification($request->message,$request->title));
 
       return back()->with('success', "success");
     }

@@ -16,6 +16,8 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
+Route::get('test', 'TestController@index');
+
 Auth::routes();
 
 Route::middleware('web')->group(function () {

@@ -8,10 +8,12 @@ use App\Social\Facebook;
 use App\Social\Instagram;
 use App\Social\Twitter;
 use App\Social\Youtube;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
 class Influencer  extends Model
 {
+  use Notifiable;
   protected $table = 'influencer_details';
   protected $primaryKey = 'influencer_id';
 

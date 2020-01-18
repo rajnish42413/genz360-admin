@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Campaign;
 use DataTables;
+use App\Notifications\PushNotification;
 use App\Influencer;
 use App\InfluncerInvolved;
 use App\Location;
@@ -67,17 +68,8 @@ class CampaignController extends Controller
         $influencer->save();
 
         $message = "Genz360 ! send {$InfluncerInvolved->amount_to_be_paid} credit for {$campaign->name} to your wallet.";
-
-            if ($influencer->not_token) {
-                $client = new Client();
-               $response = $client->post("https://exp.host/--/api/v2/push/send", ['json' => [
-                    "to" => $influencer->not_token,
-                    "sound" =>  "default",
-                    "title" => "",
-                    "channelId" => "Reminders",
-                    "message" => $message
-                ] ]);
-            }      
+        
+        $influencer->notify(new PushNotification($message,"Payout for campaign"));    
 
         return back()->with('success', "Successfully Payout");
         
