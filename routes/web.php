@@ -28,6 +28,7 @@ Route::middleware('web')->group(function () {
   Route::post('user/notify/{token}', 'NotificationController@sendToUser')->name('notify.user');
   Route::get('brand/{user}/send', 'NotificationController@infulencerSend')->name('notification.brand');
   Route::post('notification/send', 'NotificationController@send')->name('notification.send');
+  Route::post('notification/email', 'NotificationController@email')->name('notification.email');
 
   Route::resource('brands', 'BrandController');
   Route::resource('influencers', 'InfluencerController');

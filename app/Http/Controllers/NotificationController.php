@@ -11,6 +11,7 @@ use App\Notification ;
 use App\InfluncerInvolved;
 Use App\Campaign;
 use GuzzleHttp\Client;
+use Mail;
 
 class NotificationController extends Controller
 {
@@ -86,6 +87,55 @@ class NotificationController extends Controller
        $user->notify(new PushNotification($request->message,$request->title));
 
       return back()->with('success', "success");
+    }
+
+
+  public function email(Request $request)
+      {
+
+          $validatedData = $request->validate([
+          'subject' => 'required|max:150',
+          'title' => 'required|max:150',
+          'message' => 'required|max:250',
+          ]);
+
+          $data = [
+             "title" => $request->title,
+             "body" => $request->message,
+             "action" => null
+          ];
+
+
+         if ($request->allusers === "all") {
+           $users =  Influencer::whereNotNull('email')->get();
+           foreach ($users as $user) {
+              Mail::send ( 'mails.test', $data, function ($message) use (&$user, &$request) {
+                    $message->to ($user->email)->subject ( $request->subject );
+               });
+           }
+           return back()->with('success', "success");
+         }
+
+        else{
+           if ($request->campaign) {
+               $users  = InfluncerInvolved::where('campaign_id',$request->campaign)->with(['influencer' =>                           function ($query) {
+                                            $query->whereNotNull('email');
+                                          }])->get();
+               // return $users;
+
+              foreach ($users as $user) {
+                if ($user->influencer && $user->influencer->email) {
+                  Mail::send ( 'mails.test', $data, function ($message) use (&$user, &$request) {
+                    $message->to($user->influencer->email)->subject ( $request->subject );
+                  });
+                 }                 
+               }
+             return back()->with('success', "success");
+            }else{
+               return back()->with('error', "error no user found");
+            }
+        }
+
     }
 
 }
