@@ -11,7 +11,7 @@ return [
         'name' => 'Genz360.com',
     ],
 
-    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    'encryption' => env('MAIL_ENCRYPTION', 'ssl'),
     
     'username' => "apikey",
     'password' => "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",

@@ -61,7 +61,7 @@ class NotificationController extends Controller
                                         }])->get();
 
             foreach ($users as $user) {
-               $$user->influencer->notify(new PushNotification($request->message,$request->title));
+               $user->influencer->notify(new PushNotification($request->message,$request->title));
              }
           return back()->with('success', "success");
           }else{
