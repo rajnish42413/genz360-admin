@@ -56,12 +56,13 @@ class NotificationController extends Controller
 
       else{
          if ($request->campaign) {
-             $users  = InfluncerInvolved::where('campaign_id',$request->campaign)->with(['influencer' =>                           function ($query) {
+             $users  = InfluncerInvolved::where('campaign_id',$request->campaign)->with(['influencer' => function ($query) {
                                           $query->whereNotNull('not_token');
                                         }])->get();
-
             foreach ($users as $user) {
-               $user->influencer->notify(new PushNotification($request->message,$request->title));
+                if ($user->influencer) {
+                   $user->influencer->notify(new PushNotification($request->message,$request->title));
+                 }
              }
           return back()->with('success', "success");
           }else{
