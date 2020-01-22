@@ -22,7 +22,7 @@ class Influencer  extends Model
 
   public function involves()
   {
-  	return $this->hasMany(Brand::class,'influencer_id');
+  	return $this->hasMany(InfluncerInvolved::class,'influencer_id');
   }
 
   public function campaigns()

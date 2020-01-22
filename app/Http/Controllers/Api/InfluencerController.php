@@ -9,9 +9,25 @@ use Illuminate\Http\Request;
 class InfluencerController extends Controller
 { 
 
-     public function index()
+    public function index()
     {
         return Influencer::take(10)->get();
+    }
+
+
+    public function applied(Request $request)
+    {
+         // $influencer = Influencer::where("not_token",$request->tokken)->first();
+         $influencer = Influencer::where("mobile_no",8808100876)->first();
+
+         if (!$influencer) {
+            return [
+                "message" => "Influencer not found",
+                "status" => "fail"
+            ];
+        }
+
+       return $influencer->involves()->with("post")->get();
     }
 
 
