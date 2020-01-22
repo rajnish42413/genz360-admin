@@ -17,8 +17,8 @@ class InfluencerController extends Controller
 
     public function applied(Request $request)
     {
-         // $influencer = Influencer::where("not_token",$request->tokken)->first();
-         $influencer = Influencer::where("mobile_no",8808100876)->first();
+         $influencer = Influencer::where("not_token",$request->tokken)->first();
+         // $influencer = Influencer::where("mobile_no",8808100876)->first();
 
          if (!$influencer) {
             return [
