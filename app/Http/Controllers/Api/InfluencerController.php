@@ -14,6 +14,12 @@ class InfluencerController extends Controller
         return Influencer::take(10)->get();
     }
 
+    public function show($token)
+    {
+        
+        return  Influencer::where("c_tokken",$token)->first();
+    }
+
 
     public function applied(Request $request)
     {
@@ -27,17 +33,9 @@ class InfluencerController extends Controller
             ];
         }
 
-       return $influencer->involves()->with("post")->get();
+       return $influencer->involves()->with("post","campaign")->get();
     }
 
-
-    public function show(Request $request,$influencer)
-    {
-        if (!$influencer) {
-            abort(404);
-        }
-        return $influencer = Influencer::find($influencer);
-    }
 
 
     public function update(Request $request)
