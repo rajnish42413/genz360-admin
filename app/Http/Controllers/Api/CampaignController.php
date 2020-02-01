@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Influencer;
 use App\Campaign;
+use App\InfluencerPost;
 use DataTables;
 use Illuminate\Http\Request;
 
@@ -32,5 +33,27 @@ class CampaignController extends Controller
         }
 
         return Campaign::find($campaign);
+    }
+
+
+    public function dailyTaskDetail(Request $request,$id)
+    {
+       if (!$id) {
+             return response()->json([
+                 'error' => 'post id is missing'
+             ], 404);
+        }
+        return InfluencerPost::find($id);
+    }
+
+
+    public function dailyTask(Request $request,$token)
+    {
+        $influencer = Influencer::where("c_tokken",$token)->first();
+        if ($influencer) {
+          return $influencer->involves()->with("post")->with(['campaign' => function ($query) {
+              $query->where('status', 1);
+           }])->get();
+        }
     }
 }

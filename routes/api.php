@@ -27,3 +27,6 @@ Route::get('influencers/{id}', "Api\InfluencerController@show");
 
 Route::get('campaigns', "Api\CampaignController@index");
 Route::get('campaigns/{id}', "Api\CampaignController@show");
+Route::get('dailytask/{id}', "Api\CampaignController@dailytaskDetail");
+Route::get('influencer/{token}/dailytasks', "Api\CampaignController@dailytask");
+
