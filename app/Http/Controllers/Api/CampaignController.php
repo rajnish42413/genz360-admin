@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Influencer;
 use App\Campaign;
 use App\InfluencerPost;
+use App\InfluncerInvolved;
 use DataTables;
 use Illuminate\Http\Request;
 
@@ -43,7 +44,12 @@ class CampaignController extends Controller
                  'error' => 'post id is missing'
              ], 404);
         }
-        return InfluencerPost::find($id);
+        $post = InfluencerPost::find($id);
+        $involve = InfluncerInvolved::find($post->inf_inv_id)->with("campaign")->first(); 
+        return [
+          "post" => $post,
+          "involve" => $involve 
+        ];
     }
 
 
