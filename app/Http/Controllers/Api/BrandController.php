@@ -46,9 +46,10 @@ class BrandController extends Controller
                 'designation' => $request->designation,
             ]);
 
-         return [
-           "status" :"ok"
-        ];
+          return response()->json([
+            'status' => "ok",
+            'message' => 'Update Successfully'
+        ], 200);
     }
 
 
@@ -72,9 +73,10 @@ class BrandController extends Controller
         $brand->website_url=$request->url;
         $brand->gst_no=$request->gst;
         $brand->save();
-        return [
-           "status" : "ok"
-        ];
+         return response()->json([
+            'status' => "ok",
+            'message' => 'Update Successfully'
+        ], 200);
     }
 
 }

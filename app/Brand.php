@@ -10,7 +10,7 @@ class Brand extends Model
      protected $table = 'brand_details';
      protected $primaryKey = 'brand_id';
      public $timestamps = false;
-     protected $guarded = ['*'];
+     
 
 	  public function campaigns()
 	  {
