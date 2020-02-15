@@ -20,6 +20,7 @@ Route::get('/', function () {
 });
 
 Route::get('brands', "Api\BrandController@show");
+Route::put('brands', "Api\BrandController@update");
 Route::post('brands/storesopc', "Api\BrandController@storeSopc");
 
 
