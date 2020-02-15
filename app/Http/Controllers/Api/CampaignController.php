@@ -33,7 +33,7 @@ class CampaignController extends Controller
              ], 404);
         }
 
-        return Campaign::find($campaign)->with('post');
+        return Campaign::with('post')->find($campaign);
     }
 
 
