@@ -58,7 +58,7 @@ class BrandController extends Controller
         return Brand::where("c_tokken",$request->token)->first();
     }
 
-    public function update(Request $request, $token)
+    public function update(Request $request)
     {
         $brand = Brand::where("c_tokken",$request->token)->first();
          if (!$brand) {
