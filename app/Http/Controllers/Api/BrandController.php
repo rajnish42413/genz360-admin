@@ -60,7 +60,7 @@ class BrandController extends Controller
 
     public function update(Request $request)
     {
-        $brand = Brand::where("c_tokken",$request->token)->first();
+        $brand = Brand::where("c_tokken",$request->tokken)->first();
          if (!$brand) {
               return response()->json([
                   'error' => 'Brand id is missing'
