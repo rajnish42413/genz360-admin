@@ -19,6 +19,9 @@ Route::get('/', function () {
     ];
 });
 
+Route::get('brands', "Api\BrandController@show");
+Route::post('brands/storesopc', "Api\BrandController@storeSopc");
+
 
 Route::get('influencers', "Api\InfluencerController@index");
 Route::get('influencers/{token}', "Api\InfluencerController@show");
@@ -30,4 +33,5 @@ Route::get('campaigns', "Api\CampaignController@index");
 Route::get('campaigns/{id}', "Api\CampaignController@show");
 Route::get('dailytask/{id}', "Api\CampaignController@dailytaskDetail");
 Route::get('influencer/{token}/dailytasks', "Api\CampaignController@dailytask");
+
 

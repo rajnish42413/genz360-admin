@@ -8,9 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Brand extends Model
 {
      protected $table = 'brand_details';
+     protected $primaryKey = 'brand_id';
+     public $timestamps = false;
+     protected $guarded = ['*'];
 
-  public function campaigns()
-  {
-  	return $this->hasMany(Campaign::class, 'campaign_id');
-  }
+	  public function campaigns()
+	  {
+	  	return $this->hasMany(Campaign::class, 'campaign_id');
+	  }
 }
