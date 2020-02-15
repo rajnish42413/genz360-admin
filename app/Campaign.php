@@ -3,11 +3,12 @@
 namespace App;
 use App\Brand;
 use App\InfluncerInvolved ;
+use App\CampaignPost ;
 use Illuminate\Database\Eloquent\Model;
 
 class Campaign extends Model
 {
-     protected $table = 'campaign';
+      protected $table = 'campaign';
       protected $primaryKey = 'campaign_id';
 
   public function brands()
@@ -18,6 +19,16 @@ class Campaign extends Model
   public function involves()
   {
   	 return $this->belongsTo(InfluncerInvolved::class,'campaign_id','campaign_id');
+  }
+
+  public function post()
+  {
+    return $this->hasOne(CampaignPost::class,'campaign_id');
+  }
+
+  public function posts()
+  {
+    return $this->hasMany(CampaignPost::class,'campaign_id');
   }
 
 }
