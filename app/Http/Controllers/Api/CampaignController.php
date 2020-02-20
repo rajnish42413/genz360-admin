@@ -59,7 +59,7 @@ class CampaignController extends Controller
         if ($influencer) {
           return $influencer->involves()->with("post")->with(['campaign' => function ($query) {
               $query->where('status', 1);
-           }])->get();
+           }])->orderBy('inf_inv_id','desc')get();
         }
     }
 }

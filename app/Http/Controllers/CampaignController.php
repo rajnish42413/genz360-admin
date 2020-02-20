@@ -8,6 +8,7 @@ use App\Notifications\PushNotification;
 use App\Influencer;
 use App\InfluncerInvolved;
 use App\Location;
+use App\Brand;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
@@ -73,5 +74,11 @@ class CampaignController extends Controller
 
         return back()->with('success', "Successfully Payout");
         
+    }
+
+    public function create()
+    {
+        $brands =Brand::all();
+        return view('campaign.create',compact('brands'));
     }
 }
