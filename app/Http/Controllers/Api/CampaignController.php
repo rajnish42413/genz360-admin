@@ -45,7 +45,7 @@ class CampaignController extends Controller
              ], 404);
         }
         $post = InfluencerPost::find($id);
-        $involve = InfluncerInvolved::find($post->inf_inv_id)->with("campaign")->first(); 
+        $involve = InfluncerInvolved::with("campaign")->find($post->inf_inv_id);
         return [
           "post" => $post,
           "involve" => $involve 
