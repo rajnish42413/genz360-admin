@@ -13,8 +13,8 @@
       <div class="card-body p-0 d-flex">
         <div class="d-flex flex-column m-auto">
           <div class="stats-small__data text-center">
-            <span class="stats-small__label text-uppercase">Posts</span>
-            <h6 class="stats-small__value count my-3">{{$posts}}</h6>
+            <span class="stats-small__label text-uppercase">Active Influencers</span>
+            <h6 class="stats-small__value count my-3">{{$active_influencers}}</h6>
           </div>
          {{--  <div class="stats-small__data">
             <span class="stats-small__percentage stats-small__percentage--increase">4.7%</span>
@@ -78,7 +78,7 @@
         <div class="d-flex flex-column m-auto">
           <div class="stats-small__data text-center">
             <span class="stats-small__label text-uppercase">Campaign Completed</span>
-            <h6 class="stats-small__value count my-3">{{$campaigns}}</h6>
+            <h6 class="stats-small__value count my-3">{{$campaigns_done}}</h6>
           </div>
           {{-- <div class="stats-small__data">
             <span class="stats-small__percentage stats-small__percentage--decrease">2.4%</span>

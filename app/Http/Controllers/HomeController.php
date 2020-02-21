@@ -28,9 +28,11 @@ class HomeController extends Controller
     public function index()
     {
         $influencers = Influencer::count();
+        $active_influencers = Influencer::whereNotNull('not_token')->get()->count();
+        $campaigns_done = Campaign::where('status',2)->count();
         $campaigns = Campaign::count();
         $brands = Brand::count();
         $posts = CampaignPost::count();
-        return view('home',compact('influencers','campaigns','posts','brands'));
+        return view('home',compact('influencers','campaigns','posts','brands','active_influencers','campaigns_done'));
     }
 }

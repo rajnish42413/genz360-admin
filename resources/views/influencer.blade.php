@@ -52,8 +52,10 @@
                   <a class="dropdown-item" href="#" id="json">TO JSON</a>
                   <a class="dropdown-item" href="#" id="csv" >To CSV</a>
                 </div>                                    
-            </div>
+              </div>
+               <button class="btn btn-primary selected-notification-send">Send Notification</button>  
           </div>
+
           <div class="col"><h5>{{$subtotal}} of {{$total}}</h5>   </div>
             <div class="col">
               <select class="form-control" name="pagination" onchange="form.submit()">
@@ -123,6 +125,7 @@
           <table class="table table-bordered data-table table-sm small" id="tableID">
           <thead>
               <tr>
+                <th></th>
                   <th>Influencer ID</th>
                   <th>Name</th>
                   <th>Email</th>
@@ -143,6 +146,7 @@
           <tbody>
             @foreach ($influnceres as $inf)
              <tr>
+              <td><input type="checkbox" name="selected"></td>
               <td>{{$inf->influencer_id}}</td>
               <td>{{$inf->name}}</td>
               <td>{{$inf->email}}</td>
