@@ -21,7 +21,6 @@ class NotificationController extends Controller
         if (!$token) {
          abort(404);
         }
-
         return view('notification.user',compact('token'));
     }
 
@@ -31,7 +30,6 @@ class NotificationController extends Controller
        $brands = Brand::all();
        $users = Influencer::all();
        $campaigns = Campaign::where('status',1)->get();
-
        return view('notification.create',compact('brands','campaigns','users'));
     }
 
@@ -43,8 +41,6 @@ class NotificationController extends Controller
         'title' => 'max:100',
         'message' => 'required|max:250',
         ]);
-
-
       $tokens =array();
        if ($request->allusers === "all") {
          $users =  Influencer::whereNotNull('not_token')->get();
@@ -72,28 +68,40 @@ class NotificationController extends Controller
 
   }
 
+    public function notifiyusers(Request $request)
+    {
+       // return $request->all();
+        $validatedData = $request->validate([
+          'ids' => 'required',
+          'message' => 'required|max:250',
+        ]);
+        $users = Influencer::whereIn('influencer_id',$request->ids)->whereNotNull('not_token')->get();
+        if ($users) {
+          foreach ($users as $user) {
+             $user->notify(new PushNotification($request->message));
+           }
+          return [ "status" => "ok"];
+        }
+    }
+
+
     public function sendToUser(Request $request,$id)
     {
        $user =  Influencer::find($id);
-
         if (!$user) {
           return back()->with('error', "Device token is missing");
         }
-
        $validatedData = $request->validate([
           'title' => 'max:100',
           'message' => 'required|max:250',
         ]);
-
        $user->notify(new PushNotification($request->message,$request->title));
-
       return back()->with('success', "success");
     }
 
 
   public function email(Request $request)
       {
-
           $validatedData = $request->validate([
           'subject' => 'required|max:150',
           'title' => 'required|max:150',

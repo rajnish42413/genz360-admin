@@ -53,7 +53,9 @@
                   <a class="dropdown-item" href="#" id="csv" >To CSV</a>
                 </div>                                    
               </div>
-               <button class="btn btn-primary selected-notification-send">Send Notification</button>  
+               <button  type="button" class="btn btn-primary" id="send_notification">Send Notification</button>  
+
+               {{-- <a class="dropdown-item" href="{{ route('notification.user',$camp->influencer->influencer_id) }}">Send Notification</a> --}}
           </div>
 
           <div class="col"><h5>{{$subtotal}} of {{$total}}</h5>   </div>
@@ -146,7 +148,11 @@
           <tbody>
             @foreach ($influnceres as $inf)
              <tr>
-              <td><input type="checkbox" name="selected"></td>
+              <td>
+                 @if ($inf->not_token)
+                    <input type="checkbox" name="selected_influencer" value="{{$inf->influencer_id}}" class="checkBoxClass">
+                 @endif
+             </td>
               <td>{{$inf->influencer_id}}</td>
               <td>{{$inf->name}}</td>
               <td>{{$inf->email}}</td>
@@ -219,6 +225,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
 <script type="text/javascript" src="{{ asset('scripts/tableExport.js') }}"></script>
 <script>
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 $(document).ready(function() {
   $('.js-example-basic-single').select2();
 });
@@ -228,8 +239,26 @@ $(document).ready(function() {
   $('#csv').on('click',function(){
     $("#tableID").tableHTMLExport({type:'csv',filename:'sample.csv'});
   })
-  // $('#pdf').on('click',function(){
-  //   $("#tableID").tableHTMLExport({type:'pdf',filename:'sample.pdf'});
-  // })
-  </script>
+
+  $('#send_notification').click(function() {
+    var sel = $('input[type=checkbox]:checked').map(function(_, el) {
+        return $(el).val();
+    }).get();
+    // var title = prompt("Please title of push notification", "Title");
+    var message = prompt("Please message of push notification", "Message");
+     if (message && sel) {
+      $.ajax({
+        type:'POST',
+        url:`user/notify/multiple`,
+        data:{ids:sel,message:message},
+         success: function(data) {
+           if(data.status == "ok"){
+            alert("successfully send");
+           }
+         }
+        });
+      }
+   });
+</script>
+
 @endsection
