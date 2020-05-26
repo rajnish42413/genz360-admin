@@ -127,7 +127,9 @@
           <table class="table table-bordered data-table table-sm small" id="tableID">
           <thead>
               <tr>
-                <th></th>
+                <th>
+                   <input type="checkbox" id="checkAll">
+                </th>
                   <th>Influencer ID</th>
                   <th>Name</th>
                   <th>Email</th>
@@ -149,9 +151,9 @@
             @foreach ($influnceres as $inf)
              <tr>
               <td>
-                 @if ($inf->not_token)
+                 {{-- @if ($inf->not_token) --}}
                     <input type="checkbox" name="selected_influencer" value="{{$inf->influencer_id}}" class="checkBoxClass">
-                 @endif
+                 {{-- @endif --}}
              </td>
               <td>{{$inf->influencer_id}}</td>
               <td>{{$inf->name}}</td>
@@ -231,6 +233,9 @@ $.ajaxSetup({
     }
 });
 $(document).ready(function() {
+  $("#checkAll").click(function(){
+     $(".checkBoxClass").prop('checked', $(this).prop('checked'));
+  });
   $('.js-example-basic-single').select2();
 });
   $('#json').on('click',function(){

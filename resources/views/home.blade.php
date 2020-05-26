@@ -13,7 +13,7 @@
       <div class="card-body p-0 d-flex">
         <div class="d-flex flex-column m-auto">
           <div class="stats-small__data text-center">
-            <span class="stats-small__label text-uppercase">Active Influencers</span>
+            <span class="stats-small__label text-uppercase">Total Active Notifiables</span>
             <h6 class="stats-small__value count my-3">{{$active_influencers}}</h6>
           </div>
          {{--  <div class="stats-small__data">
@@ -29,7 +29,7 @@
       <div class="card-body p-0 d-flex">
         <div class="d-flex flex-column m-auto">
           <div class="stats-small__data text-center">
-            <span class="stats-small__label text-uppercase">Influencers</span>
+            <span class="stats-small__label text-uppercase">Total Registration</span>
             <h6 class="stats-small__value count my-3">{{$influencers}}</h6>
           </div>
        {{--    <div class="stats-small__data">
@@ -45,7 +45,7 @@
       <div class="card-body p-0 d-flex">
         <div class="d-flex flex-column m-auto">
           <div class="stats-small__data text-center">
-            <span class="stats-small__label text-uppercase">Brands</span>
+            <span class="stats-small__label text-uppercase">Total Brands</span>
             <h6 class="stats-small__value count my-3">{{$brands}}</h6>
           </div>
           {{-- <div class="stats-small__data">

@@ -19,6 +19,13 @@ Route::get('/', function () {
     ];
 });
 
+Route::post('login', 'Api\Auth\UserController@login');
+Route::post('register', 'Api\Auth\UserController@register');
+
+Route::group(['middleware' => 'auth:api'], function(){
+  Route::post('user', 'Api\Auth\UserController@details');
+});
+
 Route::get('brands', "Api\BrandController@show");
 Route::put('brands', "Api\BrandController@update");
 Route::post('brands/storesopc', "Api\BrandController@storeSopc");
